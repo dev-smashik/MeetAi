@@ -131,7 +131,11 @@ export const SignInView = () => {
                   </Alert>
                 )}
 
-                <Button className="w-full mt-4" type="submit" disabled={pending}>
+                <Button
+                  className="w-full mt-4"
+                  type="submit"
+                  disabled={pending}
+                >
                   Sign In
                 </Button>
 
@@ -141,18 +145,46 @@ export const SignInView = () => {
                   </span>
                 </div>
                 <div className="grid grid-cols-2 gap-4">
-                  <Button variant="outline" className="w-full" type="button" disabled={pending}>
+                  <Button
+                    variant="outline"
+                    className="w-full"
+                    type="button"
+                    disabled={pending}
+                    onClick={() => {
+                      authClient.signIn
+                        .social({
+                          provider: "google",
+                        })
+                        .catch((error) => {
+                          setError(error.message);
+                        });
+                    }}
+                  >
                     <img
-                      src="/google.svg"
+                      src="/google.png"
                       alt="Google"
                       className="h-4 w-4 mr-2"
                     />
                     Google
                   </Button>
 
-                  <Button variant="outline" className="w-full" type="button" disabled={pending}>
+                  <Button
+                    variant="outline"
+                    className="w-full"
+                    type="button"
+                    disabled={pending}
+                    onClick={() => {
+                      authClient.signIn
+                        .social({
+                          provider: "github",
+                        })
+                        .catch((error) => {
+                          setError(error.message);
+                        });
+                    }}
+                  >
                     <img
-                      src="/github.svg"
+                      src="/github.png"
                       alt="Github"
                       className="h-4 w-4 mr-2"
                     />

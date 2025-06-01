@@ -205,9 +205,18 @@ export const SignUpView = () => {
                     className="w-full"
                     type="button"
                     disabled={pending}
+                    onClick={() => {
+                      authClient.signIn
+                        .social({
+                          provider: "google",
+                        })
+                        .catch((error) => {
+                          setError(error.message);
+                        });
+                    }}
                   >
                     <img
-                      src="/google.svg"
+                      src="/google.png"
                       alt="Google"
                       className="h-4 w-4 mr-2"
                     />
@@ -219,9 +228,18 @@ export const SignUpView = () => {
                     className="w-full"
                     type="button"
                     disabled={pending}
+                    onClick={() => {
+                      authClient.signIn
+                        .social({
+                          provider: "github",
+                        })
+                        .catch((error) => {
+                          setError(error.message);
+                        });
+                    }}
                   >
                     <img
-                      src="/github.svg"
+                      src="/github.png"
                       alt="Github"
                       className="h-4 w-4 mr-2"
                     />
