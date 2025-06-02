@@ -63,12 +63,33 @@ export const SignUpView = () => {
         name: data.name,
         email: data.email,
         password: data.password,
+        callbackURL: "/", // Redirect after sign up
       },
 
       {
         onSuccess: () => {
           setPending(false);
-          router.push("/");
+        },
+        onError: ({ error }) => {
+          setError(error.message);
+        },
+      }
+    );
+  };
+
+  const onSocial = (provider: "github" | "google") => {
+    setError(null);
+    setPending(true);
+
+    authClient.signIn.social(
+      {
+        provider: provider,
+        callbackURL: "/",
+      },
+
+      {
+        onSuccess: () => {
+          setPending(false);
         },
         onError: ({ error }) => {
           setError(error.message);
@@ -205,15 +226,7 @@ export const SignUpView = () => {
                     className="w-full"
                     type="button"
                     disabled={pending}
-                    onClick={() => {
-                      authClient.signIn
-                        .social({
-                          provider: "google",
-                        })
-                        .catch((error) => {
-                          setError(error.message);
-                        });
-                    }}
+                    onClick={() => onSocial("google")}
                   >
                     <img
                       src="/google.png"
@@ -228,15 +241,7 @@ export const SignUpView = () => {
                     className="w-full"
                     type="button"
                     disabled={pending}
-                    onClick={() => {
-                      authClient.signIn
-                        .social({
-                          provider: "github",
-                        })
-                        .catch((error) => {
-                          setError(error.message);
-                        });
-                    }}
+                    onClick={() => onSocial("github")}
                   >
                     <img
                       src="/github.png"
