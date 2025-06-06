@@ -39,7 +39,7 @@ const formSchema = z
     path: ["confirmPassword"],
   });
 
-export const SignUpView = () => {
+export const SignUpView = () => {     
   const router = useRouter();
   const [error, setError] = useState<string | null>(null);
   const [pending, setPending] = useState(false);
@@ -69,6 +69,7 @@ export const SignUpView = () => {
       {
         onSuccess: () => {
           setPending(false);
+          router.push("/");
         },
         onError: ({ error }) => {
           setError(error.message);
@@ -187,7 +188,7 @@ export const SignUpView = () => {
                         <FormLabel>Confirm Password</FormLabel>
                         <FormControl>
                           <Input
-                            type="confirmpassword"
+                            type="password"
                             placeholder="********"
                             {...field}
                           />
