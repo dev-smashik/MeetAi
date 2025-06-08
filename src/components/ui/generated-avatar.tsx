@@ -32,9 +32,11 @@ export const GeneratedAvater = ({
     }
 
     return (
-        <Avatar>
-            <AvatarImage/>
-            <AvatarFallback />
+        <Avatar className="{cn(className)}">
+            <AvatarImage src={avatar.toDataUri()} alt="Avater"/>
+            <AvatarFallback>
+                {seed.charAt(0).toUpperCase()}
+            </AvatarFallback>
         </Avatar>
     )
 };
